@@ -1,18 +1,3 @@
-.. image:: logo.png
-
-|
-
-.. image:: https://circleci.com/gh/nsidnev/fastapi-realworld-example-app.svg?style=svg
-    :target: https://circleci.com/gh/markqiu/fastapi-realworld-example-app
-
-.. image:: https://travis-ci.org/nsidnev/fastapi-realworld-example-app.svg?branch=master
-    :target: https://travis-ci.org/markqiu/fastapi-realworld-example-app
-
-.. image:: https://img.shields.io/github/license/Naereen/StrapDown.js.svg
-   :target: https://github.com/markqiu/fastapi-realworld-example-app/blob/master/LICENSE
-
-.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-   :target: https://github.com/ambv/black
 
 What for
 ----------
@@ -21,28 +6,25 @@ This project is a realworld backend based on fastapi+mongodb. It can be used as 
 
 Quickstart
 ----------
+Setup development environment
 
-First, set environment variables and create database. For example using ``docker``: ::
+Install miniconda
 
-    export MONGO_DB=rwdb MONGO_PORT=5432 MONGO_USER=MONGO MONGO_PASSWORD=MONGO
-    docker run --name mongodb --rm -e MONGO_USER="$MONGO_USER" -e MONGO_PASSWORD="$MONGO_PASSWORD" -e MONGO_DB="$MONGO_DB" MONGO
-    export MONGO_HOST=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' pgdb)
-    mongo --host=$MONGO_HOST --port=$MONGO_PORT --username=$MONGO_USER $MONGO_DB
+conda env create -f environment.yml
 
-Then run the following commands to bootstrap your environment with ``poetry``: ::
+Activate py3_pacla_api_endpoint_fastapi environment:
 
-    git clone https://github.com/markqiu/fastapi-realworld-example-app
-    cd fastapi-realworld-example-app
-    poetry install
-    poetry shell
+source activate py3_pacla_api_endpoint_fastapi
 
-Then create ``.env`` file (or rename and modify ``.env.example``) in project root and set environment variables for application: ::
+DO NOT use the same conda environment for 2 different projects.
 
-    touch .env
-    echo "PROJECT_NAME=FastAPI RealWorld Application Example" >> .env
-    echo DATABASE_URL=mongo://$MONGO_USER:$MONGO_PASSWORD@$MONGO_HOST:$MONGO_PORT/$MONGO_DB >> .env
-    echo SECRET_KEY=$(openssl rand -hex 32) >> .env
-    echo ALLOWED_HOSTS='"127.0.0.1", "localhost"' >> .env
+
+Install requirement
+
+Make sure that the conda environment py3_pacla_api_endpoint_fastapi has been activated by checking the output of the command
+conda info --envs
+
+pip install -r req.txt
 
 To run the web application in debug use::
 
@@ -73,13 +55,24 @@ Application parts are:
 
 ::
 
-    models  - pydantic models that used in crud or handlers
-    crud    - CRUD for types from models (create new user/article/comment, check if user is followed by another, etc)
-    db      - db specific utils
-    core    - some general components (jwt, security, configuration)
-    api     - handlers for routes
-    main.py - FastAPI application instance, CORS configuration and api router including
-
+app
+├── api              - web related stuff.
+│   ├── dependencies - dependencies for routes definition.
+│   └── routes       - define web routes.
+├── core             - application configuration, startup events, logging.(jwt, security, configuration)
+|   |__errors        - definition of error handlers.
+|   |__config        - MongoDB, Host, Port, Project Name,..
+|   |__jwt           - functions use jwt to decode or encode (token, current_user)
+|   |__utils/security- general functions, hash/verify password
+| 
+├── db               - db related stuff.
+│   ├── mongo_utils  - general functions support for mongodb (open/close connection) 
+│   └── mongodb      - Initialization database
+|   |__ migration    - create collections to migrate and dummy data
+├── models           - pydantic models for this application.
+├── util             - All utils in b
+├── crud             - logic and crud of all collections
+└── main.py          - FastAPI application creation, configuration and api router including.
 
 Todo
 ----
