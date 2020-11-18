@@ -1,0 +1,3 @@
+name: py3_pacla_api_endpoint_fastapi
+dependencies:
+  - python=3.8.3
