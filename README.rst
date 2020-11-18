@@ -55,24 +55,24 @@ Application parts are:
 
 ::
 
-app
-├── api              - web related stuff.
-│   ├── dependencies - dependencies for routes definition.
-│   └── routes       - define web routes.
-├── core             - application configuration, startup events, logging.(jwt, security, configuration)
-|   |__errors        - definition of error handlers.
-|   |__config        - MongoDB, Host, Port, Project Name,..
-|   |__jwt           - functions use jwt to decode or encode (token, current_user)
-|   |__utils/security- general functions, hash/verify password
-| 
-├── db               - db related stuff.
-│   ├── mongo_utils  - general functions support for mongodb (open/close connection) 
-│   └── mongodb      - Initialization database
-|   |__ migration    - create collections to migrate and dummy data
-├── models           - pydantic models for this application.
-├── util             - All utils in b
-├── crud             - logic and crud of all collections
-└── main.py          - FastAPI application creation, configuration and api router including.
+    app
+    ├── api              - web related stuff.
+    │   ├── dependencies - dependencies for routes definition.
+    │   └── routes       - define web routes.
+    ├── core             - application configuration, startup events, logging.(jwt, security, configuration)
+    |   |__errors        - definition of error handlers.
+    |   |__config        - MongoDB, Host, Port, Project Name,..
+    |   |__jwt           - functions use jwt to decode or encode (token, current_user)
+    |   |__utils/security- general functions, hash/verify password
+    | 
+    ├── db               - db related stuff.
+    │   ├── mongo_utils  - general functions support for mongodb (open/close connection) 
+    │   └── mongodb      - Initialization database
+    |   |__ migration    - create collections to migrate and dummy data
+    ├── models           - pydantic models for this application.
+    ├── util             - All utils in b
+    ├── crud             - logic and crud of all collections
+    └── main.py          - FastAPI application creation, configuration and api router including.
 
 Todo
 ----
