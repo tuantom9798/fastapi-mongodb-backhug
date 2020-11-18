@@ -10,13 +10,13 @@ Setup development environment
 
 Install miniconda
 
-conda env create -f environment.yml
+    conda env create -f environment.yml
 
 Activate py3_pacla_api_endpoint_fastapi environment:
 
-source activate py3_pacla_api_endpoint_fastapi
+    source activate py3_pacla_api_endpoint_fastapi
 
-DO NOT use the same conda environment for 2 different projects.
+  DO NOT use the same conda environment for 2 different projects.
 
 
 Install requirement
@@ -24,7 +24,7 @@ Install requirement
 Make sure that the conda environment py3_pacla_api_endpoint_fastapi has been activated by checking the output of the command
 conda info --envs
 
-pip install -r req.txt
+    pip install -r req.txt
 
 To run the web application in debug use::
 
